@@ -16,7 +16,7 @@ verification_token = os.environ['VERIFICATION_TOKEN']
 def latex():
     if request.form['token'] == verification_token:
         query = request.form['text']
-        r = requests.get('https://latex.codecogs.com/png.latex?' + query)
+        r = requests.head('https://latex.codecogs.com/png.latex?' + query)
         if r.status_code == requests.codes.ok:
             payload = {'response_type': 'in_channel', 'attachments': [{'image_url': r.url}]}
             return jsonify(payload)
