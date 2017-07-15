@@ -12,7 +12,7 @@ dotenv.load_dotenv(dotenv_path)
 verification_token = os.environ['VERIFICATION_TOKEN']
 
 
-@app.route('/', methods=['POST'])
+@app.route('/apps/slack-latex', methods=['POST'])
 def latex():
     if request.form['token'] == verification_token:
         query = request.form['text']
