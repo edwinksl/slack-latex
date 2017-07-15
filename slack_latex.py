@@ -12,7 +12,7 @@ dotenv.load_dotenv(dotenv_path)
 verification_token = os.environ['VERIFICATION_TOKEN']
 
 
-@app.route('/latex', methods=['POST'])
+@app.route('/', methods=['POST'])
 def latex():
     if request.form['token'] == verification_token:
         query = request.form['text']
