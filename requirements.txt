@@ -21,4 +21,5 @@ requests==2.18.1
 six==1.10.0
 snowballstemmer==1.2.1
 urllib3==1.21.1
+uWSGI==2.0.15
 Werkzeug==0.12.2
