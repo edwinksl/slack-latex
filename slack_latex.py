@@ -22,7 +22,7 @@ def latex():
             response_url = request.form['response_url']
             payload_ack = {'response_type': 'ephemeral', 'text': query}
             r_ack = requests.post(response_url, json=payload_ack)
-            payload_delayed = {'response_type': 'in_channel', 'attachments': [{'image_url': r.url, 'fallback': 'Image of LaTeX equations'}]}
+            payload_delayed = {'response_type': 'in_channel', 'attachments': [{'image_url': r.url, 'fallback': query}]}
             r_delayed = requests.post(response_url, json=payload_delayed)
             return '', 200
 
