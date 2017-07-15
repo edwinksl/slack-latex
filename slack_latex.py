@@ -4,6 +4,7 @@ import dotenv
 import os
 import requests
 from flask import Flask, jsonify, request
+import json
 
 app = Flask(__name__)
 
@@ -18,8 +19,12 @@ def latex():
         query = request.form['text']
         r = requests.head('https://latex.codecogs.com/png.latex?' + query)
         if r.status_code == requests.codes.ok:
-            payload = {'response_type': 'in_channel', 'attachments': [{'image_url': r.url}]}
-            return jsonify(payload)
+            response_url = request.form['response_url']
+            payload_ack = {'response_type': 'ephemeral', 'text': query}
+            r_ack = requests.post(response_url, json=payload_ack)
+            payload_delayed = {'response_type': 'in_channel', 'attachments': [{'image_url': r.url, 'fallback': 'Image of LaTeX equations'}]}
+            r_delayed = requests.post(response_url, json=payload_delayed)
+            return '', 200
 
 
 if __name__ == '__main__':
