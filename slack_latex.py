@@ -3,8 +3,7 @@
 import dotenv
 import os
 import requests
-from flask import Flask, jsonify, request
-import json
+from flask import Flask, request
 
 app = Flask(__name__)
 
