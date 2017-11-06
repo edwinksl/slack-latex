@@ -9,12 +9,12 @@ app = Flask(__name__)
 
 dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 dotenv.load_dotenv(dotenv_path)
-verification_token = os.environ['VERIFICATION_TOKEN']
+verification_token = os.environ['VERIFICATION_TOKEN'].split(',')
 
 
 @app.route('/apps/slack-latex', methods=['POST'])
 def latex():
-    if request.form['token'] == verification_token:
+    if request.form['token'] in verification_token:
         query = request.form['text']
         r = requests.head('https://latex.codecogs.com/png.latex?' + query)
         if r.status_code == requests.codes.ok:
